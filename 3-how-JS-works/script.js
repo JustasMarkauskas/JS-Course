@@ -1,98 +1,105 @@
-/////////////////////////////////////
+///////////////////////////////////////
 // Lecture: Hoisting
 
 // Functions
-/*
-calculateAge(1980);
-function calculateAge(year){
-    console.log(2019 - year);
-}
-
-
-//retirement(1989);
-
-var retirement = function(year){
-    console.log(65-(2019-year));
-}
 
 //Variables
-console.log(age);
-var age = 23;
 
-function foo(){
-    console.log(age);
-    var age = 65;
-    console.log(age);
-}
+// console.log(age);
 
-foo();
-console.log(age);
 
-*/
-/////////////////////////////////////
+// var age = 30;
+// console.log(age);
+
+// function foo(){
+//     var age = 65;
+//     console.log(age);
+// }
+// foo();
+// console.log(age);
+
+///////////////////////////////////////
 // Lecture: Scoping
-/*
-var a = 'Hello bitch! ';
-first();
 
-function first(){
-    var b = 'Hi!';
-    second();
 
-    function second(){
-        var c = 'Hey!!!';
-        third()
-    }
-}
+// First scoping example
 
-function third(){
-    var d = 'John';
-    //console.log(c);
-    console.log(a+d);
-}
-*/
-/////////////////////////////////////
+
+// var a = 'Hello! ';
+// first();
+
+// function first() {
+//     var b = 'Hi! ';
+//     second();
+
+//     function second() {
+//         var c = 'Hey!';
+//         console.log(a + b + c);
+//     }
+// }
+
+
+
+
+// Example to show the differece between execution stack and scope chain
+
+
+// var d = 'Hello!';
+// third();
+
+// function third() {
+//     var e = 'Hi!';
+//     fourth();
+
+//     function fourth() {
+//         var f = 'Hey!';
+//         fifth()
+//     }
+// }
+
+// function fifth() {
+//     var g = ' John';
+//     console.log(d +g);
+// }
+
+
+
+
+///////////////////////////////////////
 // Lecture: The this keyword
-/////////////////////////////////////
-// console.log(this);
-
-/*
-calculateAge(1989)
 
 
-function calculateAge(year) {
-    console.log(2019-year);
-    console.log(this);
-}
-*/
-var john = {
-    name: 'John',
+//console.log(this);
+// calculateAge(1952)
+
+// function calculateAge(year){
+//     console.log(2020-year);
+//     console.log(this);
+// }
+
+var justas = {
+    name: 'Justas',
     yearOfBirth: 1989,
     calculateAge: function(){
         console.log(this);
-        console.log(2019 - this.yearOfBirth);
-       
-       /*
-        function innerFunction(){
-            console.log(this);
-        }
-        innerFunction();
-        */
+        console.log(2020 - this.yearOfBirth);
+
+        // function innerFunction(){
+        //     console.log(this);
+        // }
+        // innerFunction();
     }
 }
-john.calculateAge();
 
-var mike = {
-    name: 'Mike',
-    yearOfBirth: 1984
+justas.calculateAge();
+
+var gintare = {
+    name: 'Gintere',
+    yearOfBirth: 1991,
 }
 
-mike.calculateAge = john.calculateAge;
+gintare.calculateAge=justas.calculateAge;
 
-mike.calculateAge();
-
-
-
-
+gintare.calculateAge();
 
 

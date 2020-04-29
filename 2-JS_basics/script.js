@@ -29,7 +29,7 @@ var if = 23;
 // 9 pasklaita variable mutation and type coercion
 // Type coercion
 
-/*
+
 var firstName = 'Justas';
 var age = 29;
 
@@ -50,7 +50,7 @@ alert(firstName + ' is a ' + age + ' year old ' + job + '. Is he married ? ' + i
 
 var lastName = prompt('What is his last name ?');
 console.log(firstName + ' ' + lastName);
-*/
+
 
 //==========================================================================================================
 
