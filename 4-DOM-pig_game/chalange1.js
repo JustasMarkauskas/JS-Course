@@ -14,6 +14,8 @@ var scores, roundScores, activePlayer, gamePlaying;
 
 init();
 
+var lastDice;
+
 document.querySelector('.btn-roll').addEventListener('click', function(){
     if(gamePlaying){
         //1. ranom number
@@ -25,19 +27,26 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-'+dice+'.png';   
-       
-        
+                
         //3. Update the round score if the rolled number was not a 1
-        if(dice!==1){
+        if(dice === 6 && lastDice === 6){
+            //player lose ALL score
+            scores[activePlayer]=0;
+            document.querySelector('#score-'+activePlayer).textContent = 0;
+            nextPlayer();
+        }else if(dice!==1){
             //add to score
             roundScores += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScores;        
+            document.querySelector('#current-' + activePlayer).textContent = roundScores;                    
         } else{
             nextPlayer();
         }
+        lastDice = dice;
+        console.log(lastDice);
     }
     
 });
+
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
     if(gamePlaying){
@@ -99,25 +108,6 @@ function init(){
     
     document.querySelector('.player-0-panel').classList.add('active');
 }
-
-
-//generate random numbers for dice
-//(Math.random()*6)+1 random nuo 0-6, .floor sveikas skaicius.
-//dice = Math.floor(Math.random()*6)+1;
-
-// .querySelector - Pasirenkam kuri DOM elementa keisim.             .textContent - i ka keiciam. 
-//document.querySelector('#current-'+activePlayer).textContent = dice;
-//document.querySelector('#current-'+activePlayer).innerHTML = '<em>'+dice+'</em>';
-
-//document reader
-//var x = document.querySelector('#score-0').textContent;
-//console.log(x);
-
-
-
-
-
-
 
 /*
 YOUR 3 CHALLENGES

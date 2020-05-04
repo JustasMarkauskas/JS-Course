@@ -141,6 +141,8 @@ i {
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
 
+.winningScore {top: 50px;}
+
 .dice {
     position: absolute;
     left: 50%;
