@@ -84,10 +84,7 @@ var justas = {
         console.log(this);
         console.log(2020 - this.yearOfBirth);
 
-        // function innerFunction(){
-        //     console.log(this);
-        // }
-        // innerFunction();
+        
     }
 }
 

@@ -4,7 +4,7 @@
 var john = {
     name: 'John',
     yearOfBirth: 1989,
-    job: 'teacher'
+    job: 'designer'
 };
 
 // Susikuriam savo funkcini konstruktoriu
@@ -28,7 +28,7 @@ Person.prototype.placeOfBirth = 'Vilnius';
 Person.prototype.lastName = 'Markauskas';
 // Susikuriam savo naujus objectus
 
-var justas = new Person('Justas', 1989, 'teacher');
+var justas = new Person('Justas', 1989, 'designer');
 var gintare = new Person('Gintare', 1991, 'Acountant');
 var fanta = new Person('Fanta', 2013, 'Cat')
 
@@ -116,18 +116,69 @@ console.log(obj.city);
 /*****************************************************************************************
 **************65. First Class Functions: Passing Functions as Arguments*******************
 *****************************************************************************************/
+var years = [1989, 1991, 2013, 1952, 1976];
+
+function arrayCalc(arr, fn){
+    var arrRes = [];
+    for(var i=0; i < arr.length; i++){
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+
+function calculateAge3(el){
+    return 2020-el;
+}
+
+function isFullAge(el){
+    return el >= 18;
+}
+
+function maxHeartRate(el){
+    if(el>=18 && el <=81){
+      return Math.round(206.9-(0.67*el));  
+    }else{
+        return -1;
+    }
+}
 
 
-
-
-
+var ages = arrayCalc(years, calculateAge3);
+var fullAges = arrayCalc(ages, isFullAge);
+var rates = arrayCalc(ages, maxHeartRate);
+console.log(ages);
+console.log(fullAges);
+console.log(rates);
 
 /*****************************************************************************************
 **************66. First Class Functions: Functions Returning Functions********************
 *****************************************************************************************/
+function interviewQuestion(job1){
+    if(job1 === 'designer'){
+        return function(name){
+            console.log(name + ', can you please explain what UX design is ?');
+        }
+    }else if (job1 === 'teacher'){
+            return function(name){
+                console.log('What subject do you teach ' + name +'?');
+            }
+        }else{
+            return function(name){
+                console.log('Hello ' + name + ', what do you do ?');
+            }
+        }
+}
 
+var teacherQuestion = interviewQuestion('teacher');
+teacherQuestion('Justas')
 
+var designerQuestion = interviewQuestion('designer');
+designerQuestion('Gintare');
 
+var elseQuestion = interviewQuestion('katinas');
+elseQuestion('Fanta');
+
+interviewQuestion('designer')('Jonas');
 
 /*****************************************************************************************
 **************67. Immediately Invoked Function Expressions (IIFE)*************************
