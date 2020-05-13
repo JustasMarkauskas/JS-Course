@@ -350,15 +350,44 @@ c) correct answer (I would use a number for this)
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 */
 
-var quizQuestions = function(question, anwers, correct){
-    this.question = question;
-    this.anwers = anwers;
-    this.correct = correct;
-}
-
-
-
-
+// (function(){
+//     var quizQuestions = function(question, anwers, correct){
+//         this.question = question;
+//         this.anwers = anwers;
+//         this.correct = correct;
+//     }
+    
+//     quizQuestions.prototype.displayQuestion = function() {
+//         console.log(this.question);
+        
+//         for(var i=0; i<this.anwers.length; i++){
+//             console.log(i + ':' + this.anwers[i]);
+//         }
+//     }
+    
+//     quizQuestions.prototype.checkAnswer = function(ans){
+//         if (ans === this.correct){
+//             console.log('Correct answer!!!');
+//         }else{
+//             console.log('Wrong answer. Try again :)');
+//         }
+//     }
+    
+    
+//     var q1 = new quizQuestions('Is JavaScript the coolest programming language in the world ?', ['Yes', 'No'], 0);
+//     var q2 = new quizQuestions('What is the name of this course\' teacher?',['Justas','Jonas','Michael'],1);
+//     var q3 = new quizQuestions('What does best describe coding?',['Boring','Hard','Fun','Tedious'],2);
+    
+//     var questions = [q1, q2, q3];
+    
+//     var n = Math.floor(Math.random()*questions.length);
+    
+//     questions[n].displayQuestion();
+    
+//     var answer = parseInt(prompt('Please select the correct naswer.'));
+    
+//     questions[n].checkAnswer(answer);
+// })();
 
 
 
@@ -376,7 +405,73 @@ var quizQuestions = function(question, anwers, correct){
 
 
 
+(function(){
+    var quizQuestions = function(question, anwers, correct){
+        this.question = question;
+        this.anwers = anwers;
+        this.correct = correct;
+    }
+    
+    quizQuestions.prototype.displayQuestion = function() {
+        console.log(this.question);
+        
+        for(var i=0; i<this.anwers.length; i++){
+            console.log(i + ':' + this.anwers[i]);
+        }
+    }
+    
+    quizQuestions.prototype.checkAnswer = function(ans, callBack){
+        var sc;
+        if (ans === this.correct){
+            console.log('Correct answer!!!');
+            sc = callBack(true);
 
+        }else{
+            console.log('Wrong answer. Try again :)');
+            sc= callBack(false);
+        }
+        this.displayScore(sc);
+    }
+    quizQuestions.prototype.displayScore = function(score){
+        console.log('Your current score is: '+ score);
+        console.log('------------------------------------------------');
+    }
+    
+    var q1 = new quizQuestions('Is JavaScript the coolest programming language in the world ?', ['Yes', 'No'], 0);
+    var q2 = new quizQuestions('What is the name of this course\' teacher?',['Justas','Jonas','Michael'],1);
+    var q3 = new quizQuestions('What does best describe coding?',['Boring','Hard','Fun','Tedious'],2);
+    var questions = [q1, q2, q3];
+
+    function score(){
+
+        var sc = 0;
+        return function(correct){
+            if(correct){
+                sc++;
+            }
+            return sc;
+        }
+    }
+
+    var keepScore = score();
+
+function nexQuestion(){    
+    
+    var n = Math.floor(Math.random()*questions.length);
+    
+    questions[n].displayQuestion();
+    
+    var answer = prompt('Please select the correct naswer.');   
+
+    if(answer != 'exit'){
+        questions[n].checkAnswer(parseInt(answer), keepScore); 
+        nexQuestion();
+    }   
+}
+
+nexQuestion();
+   
+})();
 
 
 
